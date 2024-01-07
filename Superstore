@@ -1,0 +1,66 @@
+#This project utilizes the follow Superstore data: 
+
+CREATE TABLE superstore (
+    item_id INTEGER PRIMARY KEY,
+    item_name TEXT,
+    category TEXT,
+    price DECIMAL(10, 2),
+    stock_quantity INTEGER,
+    average_rating DECIMAL(3, 2)
+);
+
+INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
+VALUES
+    (1, 'Stainless Steel Cookware Set', 'Kitchen Supplies', 89.99, 50, 4.6),
+    (2, 'Memory Foam Mattress', 'Furnishings', 499.99, 30, 4.8),
+    (3, 'Smart LED TV', 'Electronics', 549.00, 20, 4.5),
+    (4, 'Robot Vacuum Cleaner', 'Appliances', 199.50, 40, 4.3),
+    (5, 'Wireless Bluetooth Speaker', 'Electronics', 39.99, 60, 4.2),
+    (6, 'Non-Stick Baking Set', 'Kitchen Supplies', 29.95, 80, 4.4),
+    (7, 'Cotton Bedding Set', 'Furnishings', 89.00, 25, 4.7),
+    (8, 'Smart Home Security Camera', 'Electronics', 79.95, 15, 4.1),
+    (9, 'Air Purifier', 'Appliances', 129.50, 35, 4.6),
+    (10, 'Premium Coffee Maker', 'Kitchen Supplies', 79.99, 50, 4.9),
+    (11, 'Ergonomic Office Chair', 'Furnishings', 189.00, 20, 4.5),
+    (12, 'Wireless Earbuds', 'Electronics', 49.99, 75, 4.3),
+    (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
+    (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
+    (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+
+
+-- SQL Queries for the "superstore" database
+
+-- The "superstore" database contains information about various items sold in a store.
+-- It includes columns for item ID, name, category, price, stock quantity, and average rating.
+
+-- 1. Query to Order Items by Price
+-- This query selects all columns from the "superstore" table
+-- and orders the rows by the price of the items in ascending order.
+SELECT * FROM superstore
+ORDER BY price;
+
+-- 2. Query for Statistics About Item Prices
+-- This query calculates aggregate statistics on the price column of the "superstore" table.
+-- It computes the total sum of prices (TotalPrice), the average price (AveragePrice),
+-- the lowest price (LowestPrice), the highest price (HighestPrice),
+-- and the total number of items (TotalItems).
+SELECT SUM(price) AS TotalPrice,
+       AVG(price) AS AveragePrice,
+       MIN(price) AS LowestPrice,
+       MAX(price) AS HighestPrice,
+       COUNT(*) AS TotalItems
+FROM superstore;
+
+-- 3. Query for Average Price in "Kitchen Supplies" Category
+-- This query calculates the average price of items in the "Kitchen Supplies" category.
+-- It filters the rows where the category matches 'Kitchen Supplies' exactly, as it's case-sensitive.
+SELECT AVG(price) AS AveragePriceKitchenSupplies
+FROM superstore
+WHERE category = 'Kitchen Supplies';
+
+-- 4. Custom Query Example: Count of Air Purifiers in Stock
+-- This query finds out the number of air purifiers currently in stock.
+-- It filters the "superstore" table for the item named 'Air Purifier' and selects its stock quantity.
+SELECT stock_quantity AS AirPurifiersInStock
+FROM superstore
+WHERE item_name = 'Air Purifier';
